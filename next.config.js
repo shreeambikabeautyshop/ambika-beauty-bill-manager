@@ -6,7 +6,9 @@ const nextConfig = {
       { protocol: "https", hostname: "bkckdcbzatetyrnzdxhd.supabase.co" },
     ],
   },
-  serverExternalPackages: ["@google/generative-ai", "cloudinary"],
+  experimental: {
+    serverComponentsExternalPackages: ["@google/generative-ai", "cloudinary"],
+  },
 };
 
 module.exports = nextConfig;
