@@ -36,7 +36,7 @@ export default function SearchPage() {
       const res  = await fetch("/api/search?q=" + encodeURIComponent(q));
       const data = await res.json();
       setResults(data.products || []);
-      if (!data.products?.length) toast("No products found for "" + q + """, { icon: "🔍" });
+      if (!data.products?.length) toast(`No products found for "${q}"`, { icon: "🔍" });
     } catch { toast.error("Search failed"); }
     setLoading(false);
   }

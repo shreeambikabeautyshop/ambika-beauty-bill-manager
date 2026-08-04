@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
   // Suggestions mode — use Groq AI
   if (suggest && q.length >= 2) {
     const { data } = await db.from("products").select("name").limit(200);
-    const names    = [...new Set((data || []).map((r: { name: string }) => r.name))];
+    const names = Array.from(new Set((data || []).map((r: { name: string }) => r.name)));
     try {
       const suggestions = await getSearchSuggestions(q, names);
       return NextResponse.json({ suggestions });

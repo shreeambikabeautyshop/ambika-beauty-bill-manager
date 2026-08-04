@@ -23,7 +23,7 @@ Consider partial matches, brand names, and common abbreviations.`;
   });
 
   const text = completion.choices[0]?.message?.content || "[]";
-  const clean = text.replace(/```.*?```/gs, "").trim();
+  const clean = text.replace(/```[\s\S]*?```/g, "").trim();
   const start = clean.indexOf("[");
   const end   = clean.lastIndexOf("]");
   if (start === -1) return [];
