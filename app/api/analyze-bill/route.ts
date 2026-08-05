@@ -4,6 +4,7 @@ import { uploadBillImage } from "@/lib/cloudinary";
 import { createServiceClient } from "@/lib/supabase";
 import type { Product, Bill } from "@/types";
 
+export const dynamic   = "force-dynamic";
 export const maxDuration = 60;
 
 export async function POST(req: NextRequest) {

@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase";
 import { getSearchSuggestions } from "@/lib/groq";
 
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
 export async function GET(req: NextRequest) {
   const sp      = req.nextUrl.searchParams;
   const q       = sp.get("q") || "";
