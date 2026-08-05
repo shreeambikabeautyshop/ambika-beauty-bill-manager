@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils";
 
-export default function Spinner({ className }: { className?: string }) {
+interface SpinnerProps { className?: string; }
+
+export function Spinner({ className }: SpinnerProps) {
   return (
     <div className={cn(
       "w-6 h-6 border-2 border-brand-500/30 border-t-brand-500 rounded-full animate-spin",
@@ -8,3 +10,5 @@ export default function Spinner({ className }: { className?: string }) {
     )} />
   );
 }
+
+export default Spinner;

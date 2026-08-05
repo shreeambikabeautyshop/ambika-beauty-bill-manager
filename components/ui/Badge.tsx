@@ -14,7 +14,8 @@ const variants = {
   gold:    "bg-yellow-500/15 text-yellow-300 border-yellow-500/25",
 };
 
-export default function Badge({ children, variant = "default", className }: BadgeProps) {
+// Named export for { Badge } imports
+export function Badge({ children, variant = "default", className }: BadgeProps) {
   return (
     <span className={cn(
       "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold border",
@@ -24,3 +25,6 @@ export default function Badge({ children, variant = "default", className }: Badg
     </span>
   );
 }
+
+// Default export too for flexibility
+export default Badge;

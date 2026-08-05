@@ -1,11 +1,11 @@
 interface EmptyStateProps {
-  icon:     React.ReactNode;
-  title:    string;
+  icon:      React.ReactNode;
+  title:     string;
   subtitle?: string;
-  action?:  React.ReactNode;
+  action?:   React.ReactNode;
 }
 
-export default function EmptyState({ icon, title, subtitle, action }: EmptyStateProps) {
+export function EmptyState({ icon, title, subtitle, action }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center py-20 text-center gap-4">
       <div className="w-16 h-16 rounded-2xl bg-surface-hover flex items-center justify-center opacity-40">
@@ -19,3 +19,5 @@ export default function EmptyState({ icon, title, subtitle, action }: EmptyState
     </div>
   );
 }
+
+export default EmptyState;
