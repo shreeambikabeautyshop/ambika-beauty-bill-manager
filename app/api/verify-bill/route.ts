@@ -33,6 +33,7 @@ export async function POST(req: NextRequest) {
 
   } catch (e: unknown) {
     const msg = e instanceof Error ? e.message : "Verification failed";
+    console.error("verify-bill error:", e);
     return NextResponse.json({ error: msg }, { status: 500 });
   }
 }

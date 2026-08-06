@@ -58,6 +58,7 @@ export async function POST(req: NextRequest) {
 
   } catch (e: unknown) {
     const msg = e instanceof Error ? e.message : "Unknown error";
+    console.error("analyze-bill error:", msg, e);
     return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
