@@ -10,10 +10,19 @@ export const metadata: Metadata = {
     capable: true,
     statusBarStyle: "black-translucent",
     title: "Ambika Bills",
+    startupImage: "/icon-512.png",
   },
   icons: {
-    apple: "/icon-192.png",
-    icon: "/icon-192.png",
+    icon: [
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
   },
 };
 
@@ -22,7 +31,10 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: "#0f0f13",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)",  color: "#0f0f13" },
+    { media: "(prefers-color-scheme: light)", color: "#0f0f13" },
+  ],
   viewportFit: "cover",
 };
 
@@ -32,17 +44,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="theme-color" content="#0f0f13" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
       <body className="bg-surface text-slate-200 antialiased">
         {children}
         <Toaster
           position="top-center"
           toastOptions={{
+            duration: 3000,
             style: {
               background: "#17171f",
               color: "#e2e8f0",
