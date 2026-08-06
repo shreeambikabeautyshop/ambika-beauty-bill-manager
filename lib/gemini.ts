@@ -1,7 +1,9 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import type { Bill, Product, VerifyResult, BillVerification } from "@/types";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+function getGenAI() {
+  return new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+}
 
 const EXTRACT_PROMPT = `You are an expert at reading cosmetic wholesale bill images.
 Extract ALL product rows from this bill and return ONLY valid JSON (no markdown, no explanation):
@@ -39,7 +41,7 @@ export async function extractBillFromImage(
   imageBase64: string,
   mimeType: string
 ): Promise<{ bill: Partial<Bill>; products: Product[] }> {
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = getGenAI().getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const result = await model.generateContent([
     EXTRACT_PROMPT,
@@ -83,7 +85,7 @@ export async function identifyProductFromImage(
   imageBase64: string,
   mimeType: string
 ): Promise<string> {
-  const model  = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model  = getGenAI().getGenerativeModel({ model: "gemini-1.5-flash" });
   const result = await model.generateContent([
     "Read the product name and brand from this cosmetic product image. Return ONLY the product name — nothing else.",
     { inlineData: { data: imageBase64, mimeType } },
@@ -95,7 +97,7 @@ export async function identifyProductFromImage(
 export async function generateVerificationSummary(
   products: VerifyResult[]
 ): Promise<string> {
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = getGenAI().getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const discrepancies = products.filter(p => !p.disc_match || !p.amount_match);
   const totalLoss     = products.reduce((s, p) => s + (p.loss || 0), 0);

@@ -1,6 +1,8 @@
 import Groq from "groq-sdk";
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+function getGroq() {
+  return new Groq({ apiKey: process.env.GROQ_API_KEY || "" });
+}
 
 /** Smart product search suggestions using Groq */
 export async function getSearchSuggestions(
@@ -15,7 +17,7 @@ Find products matching the search query: "${query}"
 Return ONLY a JSON array of matching product names (max 8): ["name1","name2"]
 Consider partial matches, brand names, and common abbreviations.`;
 
-  const completion = await groq.chat.completions.create({
+  const completion = await getGroq().chat.completions.create({
     model:       "llama-3.3-70b-versatile",
     messages:    [{ role: "user", content: prompt }],
     temperature: 0.1,
@@ -49,7 +51,7 @@ Return ONLY valid JSON (no markdown):
 Bill text:
 ${rawText.slice(0, 6000)}`;
 
-  const completion = await groq.chat.completions.create({
+  const completion = await getGroq().chat.completions.create({
     model:       "llama-3.3-70b-versatile",
     messages:    [{ role: "user", content: prompt }],
     temperature: 0.1,
